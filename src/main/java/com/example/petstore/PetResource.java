@@ -49,9 +49,16 @@ public class PetResource {
 		pet3.setPetName("Peththappu");
 		pet3.setPetType("Bird");
 
+		Pet pet4 = new Pet();
+		pet4.setPetId(4);
+		pet4.setPetAge(6);
+		pet4.setPetName("Boola");
+		pet4.setPetType("Dog");
+
 		pets.add(pet1);
 		pets.add(pet2);
 		pets.add(pet3);
+		pets.add(pet4);
 		return pets;
 	}
 
@@ -82,9 +89,9 @@ public class PetResource {
 	@GET
 	@Path("/name/{petName}")
 	public Response getPetName(@PathParam("petName") String petName) {
+
 		List<Pet> pets=getPetList().stream()
 				.filter(pet -> pet.getPetName().equals(petName))
-				.distinct()
 				.collect(Collectors.toList());
 
 		if (pets.isEmpty()){
@@ -95,11 +102,10 @@ public class PetResource {
 	}
 	//get pets by age
 	@GET
-	@Path("/name/{petAge}")
+	@Path("/age/{petAge}")
 	public Response getPetAge(@PathParam("petAge") Integer petAge) {
 		List<Pet> pets=getPetList().stream()
 				.filter(pet -> pet.getPetAge().equals(petAge))
-				.distinct()
 				.collect(Collectors.toList());
 
 		if (pets.isEmpty()){
